@@ -19,6 +19,7 @@ public:
 	double evaluate(double x) const;
 	Polynomial add(const Polynomial& other) const;
 	Polynomial subtract(const Polynomial& other) const;
+	Polynomial multiply(double x);
 	std::string toString() const;
 
 private:
