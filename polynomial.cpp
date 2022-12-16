@@ -37,6 +37,15 @@ Polynomial Polynomial::add(const Polynomial& other) const {
 	return Polynomial(resultCoefficients);
 }
 
+Polynomial Polynomial::subtract(const Polynomial& other) const {
+	int resultDegree = std::max(getDegree(), other.getDegree());
+	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
+	for (int i = 0; i <= resultDegree; i++) {
+		resultCoefficients[i] = getCoefficient(i) - other.getCoefficient(i);
+	}
+	return Polynomial(resultCoefficients);
+}
+
 std::string Polynomial::toString() const {
 	int degree = getDegree();
 	std::ostringstream oss;
@@ -62,10 +71,22 @@ std::string Polynomial::toString() const {
 	return oss.str();
 }
 
+void Polynomial::removeEmptyCoefficients() {
+	int highestNonEmpty = getDegree();
+	while (highestNonEmpty > 0 && coefficients[highestNonEmpty] == 0) {
+		highestNonEmpty--;
+	}
+	coefficients.resize(highestNonEmpty + 1);
+}
+
 std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
 	return os << p.toString();
 }
 
 Polynomial operator+(const Polynomial& p1, const Polynomial& p2) {
 	return p1.add(p2);
+}
+
+Polynomial operator-(const Polynomial& p1, const Polynomial& p2) {
+	return p1.subtract(p2);
 }
