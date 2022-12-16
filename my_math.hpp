@@ -2,7 +2,6 @@
 #define MY_MATH_H
 
 #include <vector>
-#include <math.h>
 #include <sstream>
 
 int padovan(int n);
