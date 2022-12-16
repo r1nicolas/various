@@ -24,6 +24,6 @@ private:
 	std::vector<double> coefficients;
 };
 
-std::ostream& operator<<(std::ostream& os, const Polynomial& p)
+std::ostream& operator<<(std::ostream& os, const Polynomial& p);
 
 #endif // MY_MATH_H
