@@ -21,11 +21,20 @@ int Polynomial::getDegree() const {
 }
 
 double Polynomial::evaluate(double x) const {
-	double result = 0.0;
-	for (int i = 0; i < coefficients.size(); i++) {
-		result += coefficients[i] * pow(x, i);
+	double result = 0;
+	for (int i = getDegree(); i >= 0; --i) {
+		result = result * x + coefficients[i];
 	}
 	return result;
+}
+
+Polynomial Polynomial::add(const Polynomial& other) const {
+	int resultDegree = std::max(getDegree(), other.getDegree());
+	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
+	for (int i = 0; i <= resultDegree; i++) {
+		resultCoefficients[i] = getCoefficient(i) + other.getCoefficient(i);
+	}
+	return Polynomial(resultCoefficients);
 }
 
 std::string Polynomial::toString() const {
