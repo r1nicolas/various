@@ -25,5 +25,6 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& os, const Polynomial& p);
+Polynomial operator+(const Polynomial& p1, const Polynomial& p2);
 
 #endif // MY_MATH_H
