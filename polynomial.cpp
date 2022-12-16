@@ -4,9 +4,13 @@ Polynomial::Polynomial() : coefficients(0) {}
 
 Polynomial::Polynomial(int degree) : coefficients(degree + 1) {}
 
-Polynomial::Polynomial(const std::vector<double>& coefficients) : coefficients(coefficients) {}
+Polynomial::Polynomial(const std::vector<double>& coefficients) : coefficients(coefficients) {
+	removeEmptyCoefficients()
+}
 
-Polynomial::Polynomial(const Polynomial& other) : coefficients(other.coefficients) {}
+Polynomial::Polynomial(const Polynomial& other) : coefficients(other.coefficients) {
+	removeEmptyCoefficients()
+}
 
 void Polynomial::setCoefficient(int degree, double coefficient) {
 	coefficients[degree] = coefficient;
@@ -17,6 +21,7 @@ double Polynomial::getCoefficient(int degree) const {
 }
 
 int Polynomial::getDegree() const {
+	removeEmptyCoefficients()
 	return coefficients.size() - 1;
 }
 
