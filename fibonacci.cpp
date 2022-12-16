@@ -1,4 +1,4 @@
-#include<suite>
+#include<my_math>
 
 int fibonacci(int n) {
 	int f_n = 1;
