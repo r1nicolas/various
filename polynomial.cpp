@@ -51,6 +51,14 @@ Polynomial Polynomial::subtract(const Polynomial& other) const {
 	return Polynomial(resultCoefficients);
 }
 
+Polynomial Polynomial::multiply(double x) const {
+	std::vector<double> resultCoefficients(getDegree() + 1, 0.0);
+	for (int i = 0; i < coefficients.size(); i++) {
+		resultCoefficients[i] = coefficients[i] * x;
+	}
+	return Polynomial(resultCoefficients);
+}
+
 std::string Polynomial::toString() const {
 	int degree = getDegree();
 	std::ostringstream oss;
