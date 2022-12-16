@@ -65,3 +65,7 @@ std::string Polynomial::toString() const {
 std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
 	return os << p.toString();
 }
+
+Polynomial operator+(const Polynomial& p1, const Polynomial& p2) {
+	return p1.add(p2);
+}
