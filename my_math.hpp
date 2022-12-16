@@ -17,6 +17,7 @@ public:
 	double getCoefficient(int degree) const;
 	int getDegree() const;
 	double evaluate(double x) const;
+	Polynomial add(const Polynomial& other) const
 	std::string toString() const;
 
 private:
