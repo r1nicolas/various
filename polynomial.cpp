@@ -51,6 +51,14 @@ Polynomial Polynomial::subtract(const Polynomial& other) const {
 	return Polynomial(resultCoefficients);
 }
 
+Polynomial Polynomial::multiply(int n) const {
+	std::vector<double> resultCoefficients(this->getDegree() + 1, 0.0);
+	for (int i = 0; i < this->coefficients.size(); i++) {
+		resultCoefficients[i] = this->coefficients[i] * n;
+	}
+	return Polynomial(resultCoefficients);
+}
+
 Polynomial Polynomial::multiply(double f) const {
 	std::vector<double> resultCoefficients(this->getDegree() + 1, 0.0);
 	for (int i = 0; i < this->coefficients.size(); i++) {
@@ -118,6 +126,15 @@ Polynomial operator+(const Polynomial& p1, const Polynomial& p2) {
 Polynomial operator-(const Polynomial& p1, const Polynomial& p2) {
 	return p1.subtract(p2);
 }
+
+Polynomial operator*(int n, const Polynomial& p) {
+	return p.multiply(n);
+}
+
+Polynomial operator*(const Polynomial& p, int n) {
+	return p.multiply(n);
+}
+
 Polynomial operator*(double f, const Polynomial& p) {
 	return p.multiply(f);
 }
