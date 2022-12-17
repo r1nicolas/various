@@ -5,65 +5,76 @@ Polynomial::Polynomial() : coefficients(0) {}
 Polynomial::Polynomial(int degree) : coefficients(degree + 1) {}
 
 Polynomial::Polynomial(const std::vector<double>& coefficients) : coefficients(coefficients) {
-	removeEmptyCoefficients()
+	this->removeEmptyCoefficients()
 }
 
 Polynomial::Polynomial(const Polynomial& other) : coefficients(other.coefficients) {
-	removeEmptyCoefficients()
+	this->removeEmptyCoefficients()
 }
 
 void Polynomial::setCoefficient(int degree, double coefficient) {
-	coefficients[degree] = coefficient;
+	this->coefficients[degree] = coefficient;
 }
 
 double Polynomial::getCoefficient(int degree) const {
-	return coefficients[degree];
+	return this->coefficients[degree];
 }
 
 int Polynomial::getDegree() const {
-	removeEmptyCoefficients()
-	return coefficients.size() - 1;
+	this->removeEmptyCoefficients()
+	return this->coefficients.size() - 1;
 }
 
 double Polynomial::evaluate(double x) const {
 	double result = 0;
-	for (int i = getDegree(); i >= 0; --i) {
-		result = result * x + coefficients[i];
+	for (int i = this->getDegree(); i >= 0; --i) {
+		result = result * x + this->coefficients[i];
 	}
 	return result;
 }
 
 Polynomial Polynomial::add(const Polynomial& other) const {
-	int resultDegree = std::max(getDegree(), other.getDegree());
+	int resultDegree = std::max(this->getDegree(), other.getDegree());
 	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
 	for (int i = 0; i <= resultDegree; i++) {
-		resultCoefficients[i] = getCoefficient(i) + other.getCoefficient(i);
+		resultCoefficients[i] = this->getCoefficient(i) + other.getCoefficient(i);
 	}
 	return Polynomial(resultCoefficients);
 }
 
 Polynomial Polynomial::subtract(const Polynomial& other) const {
-	int resultDegree = std::max(getDegree(), other.getDegree());
+	int resultDegree = std::max(this->getDegree(), other.getDegree());
 	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
 	for (int i = 0; i <= resultDegree; i++) {
-		resultCoefficients[i] = getCoefficient(i) - other.getCoefficient(i);
+		resultCoefficients[i] = this->getCoefficient(i) - other.getCoefficient(i);
 	}
 	return Polynomial(resultCoefficients);
 }
 
-Polynomial Polynomial::multiply(double x) const {
-	std::vector<double> resultCoefficients(getDegree() + 1, 0.0);
-	for (int i = 0; i < coefficients.size(); i++) {
-		resultCoefficients[i] = coefficients[i] * x;
+Polynomial Polynomial::multiply(double f) const {
+	std::vector<double> resultCoefficients(this->getDegree() + 1, 0.0);
+	for (int i = 0; i < this->coefficients.size(); i++) {
+		resultCoefficients[i] = this->coefficients[i] * f;
+	}
+	return Polynomial(resultCoefficients);
+}
+
+Polynomial Polynomial::multiply(const Polynomial& other) const {
+	int resultDegree = this->getDegree() + other.getDegree();
+	std::vector<double> resultCoefficients(resultDegree + 1, 0);
+	for (int i = 0; i <= this->getDegree(); i++) {
+		for (int j = 0; j <= other.getDegree(); j++) {
+			resultCoefficients[i+j] += this->getCoefficient(i) * other.getCoefficient(j);
+		}
 	}
 	return Polynomial(resultCoefficients);
 }
 
 std::string Polynomial::toString() const {
-	int degree = getDegree();
+	int degree = this->getDegree();
 	std::ostringstream oss;
 	for (int i = degree; i >= 0; i--) {
-		double coefficient = getCoefficient(i);
+		double coefficient = this->getCoefficient(i);
 		if (coefficient != 0.0) {
 			if (coefficient > 0 && i != degree) {
 				oss << "+";
@@ -84,12 +95,16 @@ std::string Polynomial::toString() const {
 	return oss.str();
 }
 
+double Polynomial::operator[](int degree) const {
+	return getCoefficient(degree);
+}
+
 void Polynomial::removeEmptyCoefficients() {
-	int highestNonEmpty = getDegree();
-	while (highestNonEmpty > 0 && coefficients[highestNonEmpty] == 0) {
+	int highestNonEmpty = this->getDegree();
+	while (highestNonEmpty > 0 && this->coefficients[highestNonEmpty] == 0) {
 		highestNonEmpty--;
 	}
-	coefficients.resize(highestNonEmpty + 1);
+	this->coefficients.resize(highestNonEmpty + 1);
 }
 
 std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
@@ -102,4 +117,15 @@ Polynomial operator+(const Polynomial& p1, const Polynomial& p2) {
 
 Polynomial operator-(const Polynomial& p1, const Polynomial& p2) {
 	return p1.subtract(p2);
+}
+Polynomial operator*(double f, const Polynomial& p) {
+	return p.multiply(f);
+}
+
+Polynomial operator*(const Polynomial& p, double f) {
+	return p.multiply(f);
+}
+
+Polynomial operator*(const Polynomial& p1, const Polynomial& p2) {
+	return p1.multiply(p2);
 }
