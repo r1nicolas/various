@@ -19,6 +19,7 @@ public:
 	double evaluate(double x) const;
 	Polynomial add(const Polynomial& other) const;
 	Polynomial subtract(const Polynomial& other) const;
+	Polynomial multiply(int n) const;
 	Polynomial multiply(double f) const;
 	Polynomial multiply(const Polynomial& other) const;
 	std::string toString() const;
@@ -31,6 +32,8 @@ private:
 std::ostream& operator<<(std::ostream& os, const Polynomial& p);
 Polynomial operator+(const Polynomial& p1, const Polynomial& p2);
 Polynomial operator-(const Polynomial& p1, const Polynomial& p2);
+Polynomial operator*(int n, const Polynomial& p); 
+Polynomial operator*(const Polynomial& p, int n);
 Polynomial operator*(double f, const Polynomial& p); 
 Polynomial operator*(const Polynomial& p, double f);
 Polynomial operator*(const Polynomial& p1, const Polynomial& p2);
