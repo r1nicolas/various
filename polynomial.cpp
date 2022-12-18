@@ -33,6 +33,18 @@ double Polynomial::evaluate(double x) const {
 	return result;
 }
 
+Polynomial Polynomial::add(int value) const {
+	Polynomial result(*this);
+	result.setCoefficient(0, this->getCoefficient(0) + value);
+	return result;
+}
+
+Polynomial Polynomial::add(double value) const {
+	Polynomial result(*this);
+	result.setCoefficient(0, this->getCoefficient(0) + value);
+	return result;
+}
+
 Polynomial Polynomial::add(const Polynomial& other) const {
 	int resultDegree = std::max(this->getDegree(), other.getDegree());
 	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
@@ -40,6 +52,18 @@ Polynomial Polynomial::add(const Polynomial& other) const {
 		resultCoefficients[i] = this->getCoefficient(i) + other.getCoefficient(i);
 	}
 	return Polynomial(resultCoefficients);
+}
+
+Polynomial Polynomial::substract(int value) const {
+	Polynomial result(*this);
+	result.setCoefficient(0, this->getCoefficient(0) + value);
+	return result;
+}
+
+Polynomial Polynomial::substract(double value) const {
+	Polynomial result(*this);
+	result.setCoefficient(0, this->getCoefficient(0) - value);
+	return result;
 }
 
 Polynomial Polynomial::subtract(const Polynomial& other) const {
@@ -119,8 +143,44 @@ std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
 	return os << p.toString();
 }
 
+Polynomial operator+(const Polynomial& p, int value) {
+	return p.add(value);
+}
+
+Polynomial operator+(int value, const Polynomial& p) {
+	return p.add(value);
+}
+
+Polynomial operator+(const Polynomial& p, double value) {
+	return p.add(value);
+}
+
+Polynomial operator+(double value, const Polynomial& p) {
+	return p.add(value);
+}
+
 Polynomial operator+(const Polynomial& p1, const Polynomial& p2) {
 	return p1.add(p2);
+}
+
+Polynomial operator-(const Polynomial& p) {
+	return p.multiply(-1);
+}
+
+Polynomial operator-(const Polynomial& p, int value) {
+	return p.substract(value);
+}
+
+Polynomial operator-(int value, const Polynomial& p) {
+	return p.multiply(-1).add(value);
+}
+
+Polynomial operator-(const Polynomial& p, double value) {
+	return p.substract(value);
+}
+
+Polynomial operator-(double value, const Polynomial& p) {
+	return p.multiply(-1).add(value);
 }
 
 Polynomial operator-(const Polynomial& p1, const Polynomial& p2) {
