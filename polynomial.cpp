@@ -112,8 +112,7 @@ std::string Polynomial::toString() const {
 			}
 			if (coefficient == -1.0 && i != 0) {
 				oss << "-";
-			}
-			if (coefficient != 1.0 || i == 0) {
+			} else if (coefficient != 1.0 || i == 0) {
 				oss << coefficient;
 			}
 			if (i > 1) {
