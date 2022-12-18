@@ -5,11 +5,11 @@ Polynomial::Polynomial() : coefficients(0) {}
 Polynomial::Polynomial(int degree) : coefficients(degree + 1) {}
 
 Polynomial::Polynomial(const std::vector<double>& coefficients) : coefficients(coefficients) {
-	this->removeEmptyCoefficients()
+	this->removeEmptyCoefficients();
 }
 
 Polynomial::Polynomial(const Polynomial& other) : coefficients(other.coefficients) {
-	this->removeEmptyCoefficients()
+	this->removeEmptyCoefficients();
 }
 
 void Polynomial::setCoefficient(int degree, double coefficient) {
