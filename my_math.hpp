@@ -17,10 +17,14 @@ public:
 	double getCoefficient(int degree) const;
 	int getDegree() const;
 	double evaluate(double x) const;
+	Polynomial add(int value) const;
+	Polynomial add(double value) const;
 	Polynomial add(const Polynomial& other) const;
+	Polynomial substract(int value) const;
+	Polynomial substract(double value) const;
 	Polynomial subtract(const Polynomial& other) const;
-	Polynomial multiply(int n) const;
-	Polynomial multiply(double f) const;
+	Polynomial multiply(int value) const;
+	Polynomial multiply(double value) const;
 	Polynomial multiply(const Polynomial& other) const;
 	std::string toString() const;
 	double operator[](int degree) const;
@@ -30,13 +34,21 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& os, const Polynomial& p);
+Polynomial operator+(const Polynomial& p, int value);
+Polynomial operator+(int value, const Polynomial& p);
+Polynomial operator+(const Polynomial& p, double value);
+Polynomial operator+(double value, const Polynomial& p);
 Polynomial operator+(const Polynomial& p1, const Polynomial& p2);
+Polynomial operator-(const Polynomial& p);
+Polynomial operator-(const Polynomial& p, int value);
+Polynomial operator-(int value, const Polynomial& p);
+Polynomial operator-(const Polynomial& p, double value);
+Polynomial operator-(double value, const Polynomial& p);
 Polynomial operator-(const Polynomial& p1, const Polynomial& p2);
-Polynomial operator*(int n, const Polynomial& p); 
-Polynomial operator*(const Polynomial& p, int n);
-Polynomial operator*(double f, const Polynomial& p); 
-Polynomial operator*(const Polynomial& p, double f);
+Polynomial operator*(int value, const Polynomial& p); 
+Polynomial operator*(const Polynomial& p, int value);
+Polynomial operator*(double value, const Polynomial& p); 
+Polynomial operator*(const Polynomial& p, double value);
 Polynomial operator*(const Polynomial& p1, const Polynomial& p2);
-
 
 #endif // MY_MATH_H
