@@ -21,7 +21,6 @@ double Polynomial::getCoefficient(int degree) const {
 }
 
 int Polynomial::getDegree() const {
-	this->removeEmptyCoefficients()
 	return this->coefficients.size() - 1;
 }
 
