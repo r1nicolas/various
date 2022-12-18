@@ -75,18 +75,18 @@ Polynomial Polynomial::subtract(const Polynomial& other) const {
 	return Polynomial(resultCoefficients);
 }
 
-Polynomial Polynomial::multiply(int n) const {
+Polynomial Polynomial::multiply(int value) const {
 	std::vector<double> resultCoefficients(this->getDegree() + 1, 0.0);
 	for (int i = 0; i < this->coefficients.size(); i++) {
-		resultCoefficients[i] = this->coefficients[i] * n;
+		resultCoefficients[i] = this->coefficients[i] * value;
 	}
 	return Polynomial(resultCoefficients);
 }
 
-Polynomial Polynomial::multiply(double f) const {
+Polynomial Polynomial::multiply(double value) const {
 	std::vector<double> resultCoefficients(this->getDegree() + 1, 0.0);
 	for (int i = 0; i < this->coefficients.size(); i++) {
-		resultCoefficients[i] = this->coefficients[i] * f;
+		resultCoefficients[i] = this->coefficients[i] * value;
 	}
 	return Polynomial(resultCoefficients);
 }
@@ -187,20 +187,20 @@ Polynomial operator-(const Polynomial& p1, const Polynomial& p2) {
 	return p1.subtract(p2);
 }
 
-Polynomial operator*(int n, const Polynomial& p) {
-	return p.multiply(n);
+Polynomial operator*(int value, const Polynomial& p) {
+	return p.multiply(value);
 }
 
-Polynomial operator*(const Polynomial& p, int n) {
-	return p.multiply(n);
+Polynomial operator*(const Polynomial& p, int value) {
+	return p.multiply(value);
 }
 
-Polynomial operator*(double f, const Polynomial& p) {
-	return p.multiply(f);
+Polynomial operator*(double value, const Polynomial& p) {
+	return p.multiply(value);
 }
 
-Polynomial operator*(const Polynomial& p, double f) {
-	return p.multiply(f);
+Polynomial operator*(const Polynomial& p, double value) {
+	return p.multiply(value);
 }
 
 Polynomial operator*(const Polynomial& p1, const Polynomial& p2) {
