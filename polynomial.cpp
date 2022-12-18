@@ -122,6 +122,8 @@ std::string Polynomial::toString() const {
 			}
 		}
 	}
+	if (oss.str() == "")
+		oss << "0";
 	return oss.str();
 }
 
