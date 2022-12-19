@@ -26,8 +26,11 @@ public:
 	Polynomial multiply(int value) const;
 	Polynomial multiply(double value) const;
 	Polynomial multiply(const Polynomial& other) const;
+	Polynomial divide(int value) const;
+	Polynomial divide(double value) const;
 	Polynomial derivative() const;
 	Polynomial primitive(double value = 0) const;
+	double Polynomial::integral(double lowerBound, double upperBound) const;
 	std::string toString() const;
 	double operator[](int degree) const;
 private:
