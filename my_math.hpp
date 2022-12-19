@@ -55,5 +55,7 @@ Polynomial operator*(const Polynomial& p, int value);
 Polynomial operator*(double value, const Polynomial& p); 
 Polynomial operator*(const Polynomial& p, double value);
 Polynomial operator*(const Polynomial& p1, const Polynomial& p2);
+Polynomial operator/(const Polynomial& p, int value);
+Polynomial operator/(const Polynomial& p, double value);
 
 #endif // MY_MATH_H
