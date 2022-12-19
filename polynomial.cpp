@@ -75,16 +75,18 @@ Polynomial Polynomial::subtract(const Polynomial& other) const {
 }
 
 Polynomial Polynomial::multiply(int value) const {
-	std::vector<double> resultCoefficients(this->getDegree() + 1, 0.0);
-	for (int i = 0; i < this->coefficients.size(); i++) {
+	int resultDegree = this->getDegree();
+	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
+	for (int i = 0; i <= resultDegree; i++) {
 		resultCoefficients[i] = this->coefficients[i] * value;
 	}
 	return Polynomial(resultCoefficients);
 }
 
 Polynomial Polynomial::multiply(double value) const {
-	std::vector<double> resultCoefficients(this->getDegree() + 1, 0.0);
-	for (int i = 0; i < this->coefficients.size(); i++) {
+	int resultDegree = this->getDegree();
+	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
+	for (int i = 0; i <= resultDegree; i++) {
 		resultCoefficients[i] = this->coefficients[i] * value;
 	}
 	return Polynomial(resultCoefficients);
@@ -101,23 +103,46 @@ Polynomial Polynomial::multiply(const Polynomial& other) const {
 	return Polynomial(resultCoefficients);
 }
 
-Polynomial Polynomial::derivative() const {
-	int n = coefficients.size();
-	std::vector<double> deriv_coeffs(n - 1);
-	for (int i = 1; i < n; ++i) {
-		deriv_coeffs[i - 1] = coefficients[i] * i;
+Polynomial Polynomial::divide(int value) const {
+	int resultDegree = this->getDegree();
+	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
+	for (int i = 0; i <= resultDegree; i++) {
+		resultCoefficients[i] = this->coefficients[i] / value;
 	}
-	return Polynomial(deriv_coeffs);
+	return Polynomial(resultCoefficients);
+}
+
+Polynomial Polynomial::divide(double value) const {
+	int resultDegree = this->getDegree();
+	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
+	for (int i = 0; i <= resultDegree; i++) {
+		resultCoefficients[i] = this->coefficients[i] / value;
+	}
+	return Polynomial(resultCoefficients);
+}
+
+Polynomial Polynomial::derivative() const {
+	int resultDegree = coefficients.size();
+	std::vector<double> resultCoefficients(resultDegree - 1);
+	for (int i = 1; i < resultDegree; i++) {
+		resultCoefficients[i - 1] = coefficients[i] * i;
+	}
+	return Polynomial(resultCoefficients);
 }
 
 Polynomial Polynomial::primitive(double value = 0) const {
-	int n = coefficients.size();
-	std::vector<double> prim_coeffs(n + 1);
-	for (int i = 0; i < n; ++i) {
-		prim_coeffs[i + 1] = coefficients[i] / (i + 1);
+	int resultDegree = coefficients.size();
+	std::vector<double> resultCoefficients(resultDegree + 1);
+	for (int i = 0; i < resultDegree; ++i) {
+		resultCoefficients[i + 1] = coefficients[i] / (i + 1);
 	}
 	prim_coeffs[0] = value;
-	return Polynomial(prim_coeffs);
+	return Polynomial(resultCoefficients);
+}
+
+double Polynomial::integral(double lowerBound, double upperBound) const {
+	Polynomial primitive = this->primitive();
+	return primitive.evaluate(upperBound) - primitive.evaluate(lowerBound);
 }
 
 std::string Polynomial::toString() const {
@@ -224,4 +249,12 @@ Polynomial operator*(const Polynomial& p, double value) {
 
 Polynomial operator*(const Polynomial& p1, const Polynomial& p2) {
 	return p1.multiply(p2);
+}
+
+Polynomial operator/(const Polynomial& p, int value) {
+	return p.divide(value);
+}
+
+Polynomial operator/(const Polynomial& p, double value) {
+	return p.divide(value);
 }
