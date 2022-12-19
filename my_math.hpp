@@ -30,7 +30,7 @@ public:
 	Polynomial divide(double value) const;
 	Polynomial derivative() const;
 	Polynomial primitive(double value = 0) const;
-	double Polynomial::integral(double lowerBound, double upperBound) const;
+	double integral(double lowerBound, double upperBound) const;
 	std::string toString() const;
 	double operator[](int degree) const;
 private:
