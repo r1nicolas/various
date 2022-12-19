@@ -127,6 +127,25 @@ std::string Polynomial::toString() const {
 	return oss.str();
 }
 
+Polynomial Polynomial::derivative() const {
+	int n = coefficients.size();
+	std::vector<double> deriv_coeffs(n - 1);
+	for (int i = 1; i < n; ++i) {
+		deriv_coeffs[i - 1] = coefficients[i] * i;
+	}
+	return Polynomial(deriv_coeffs);
+}
+
+Polynomial Polynomial::primitive(double value = 0) const {
+	int n = coefficients.size();
+	std::vector<double> prim_coeffs(n + 1);
+	for (int i = 0; i < n; ++i) {
+		prim_coeffs[i + 1] = coefficients[i] / (i + 1);
+	}
+	prim_coeffs[0] = value;
+	return Polynomial(prim_coeffs);
+}
+
 double Polynomial::operator[](int degree) const {
 	return getCoefficient(degree);
 }
