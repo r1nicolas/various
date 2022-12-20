@@ -16,7 +16,8 @@ public:
 	void setCoefficient(int degree, double coefficient);
 	double getCoefficient(int degree) const;
 	int getDegree() const;
-	double evaluate(double x) const;
+	double evaluate(double value) const;
+	Polynomial compose(const Polynomial& other) const;
 	Polynomial add(int value) const;
 	Polynomial add(double value) const;
 	Polynomial add(const Polynomial& other) const;
