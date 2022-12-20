@@ -24,10 +24,18 @@ int Polynomial::getDegree() const {
 	return this->coefficients.size() - 1;
 }
 
-double Polynomial::evaluate(double x) const {
+double Polynomial::evaluate(double value) const {
 	double result = 0;
-	for (int i = this->getDegree(); i >= 0; --i) {
-		result = result * x + this->coefficients[i];
+	for (int i = this->getDegree(); i >= 0; i--) {
+		result = result * value + this->coefficients[i];
+	}
+	return result;
+}
+
+Polynomial Polynomial::compose(const Polynomial& other) const {
+	Polynomial result();
+	for(int i = this->getDegree();i >= 0;i--){
+		result = result.multiply(other) + this->coefficients[i];
 	}
 	return result;
 }
@@ -55,7 +63,7 @@ Polynomial Polynomial::add(const Polynomial& other) const {
 
 Polynomial Polynomial::substract(int value) const {
 	Polynomial result(*this);
-	result.setCoefficient(0, this->getCoefficient(0) + value);
+	result.setCoefficient(0, this->getCoefficient(0) - value);
 	return result;
 }
 
