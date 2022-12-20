@@ -24,6 +24,14 @@ int Polynomial::getDegree() const {
 	return this->coefficients.size() - 1;
 }
 
+double Polynomial::evaluate(int value) const {
+	double result = 0;
+	for (int i = this->getDegree(); i >= 0; i--) {
+		result = result * value + this->coefficients[i];
+	}
+	return result;
+}
+
 double Polynomial::evaluate(double value) const {
 	double result = 0;
 	for (int i = this->getDegree(); i >= 0; i--) {
@@ -38,6 +46,18 @@ Polynomial Polynomial::compose(const Polynomial& other) const {
 		result = result.multiply(other) + this->coefficients[i];
 	}
 	return result;
+}
+
+bool Polynomial::equals(const Polynomial& other) const {
+	if (coefficients.size() != other.coefficients.size()) {
+		return false;
+	}
+	for (size_t i = 0; i < coefficients.size(); i++) {
+		if (coefficients[i] != other.coefficients[i]) {
+			return false;
+		}
+	}
+	return true;
 }
 
 Polynomial Polynomial::add(int value) const {
@@ -193,6 +213,14 @@ void Polynomial::removeEmptyCoefficients() {
 
 std::ostream& operator<<(std::ostream& os, const Polynomial& p) {
 	return os << p.toString();
+}
+
+bool operator==(const Polynomial& p1, const Polynomial& p2) {
+	return p1.equals(p2);
+}
+
+bool operator!=(const Polynomial& p1, const Polynomial& p2) {
+	return !p1.equals(p2);
 }
 
 Polynomial operator+(const Polynomial& p, int value) {
