@@ -16,8 +16,10 @@ public:
 	void setCoefficient(int degree, double coefficient);
 	double getCoefficient(int degree) const;
 	int getDegree() const;
+	double evaluate(int value) const;
 	double evaluate(double value) const;
 	Polynomial compose(const Polynomial& other) const;
+	bool equals(const Polynomial& other) const;
 	Polynomial add(int value) const;
 	Polynomial add(double value) const;
 	Polynomial add(const Polynomial& other) const;
@@ -40,6 +42,8 @@ private:
 };
 
 std::ostream& operator<<(std::ostream& os, const Polynomial& p);
+bool operator==(const Polynomial& p1, const Polynomial& p2);
+bool operator!=(const Polynomial& p1, const Polynomial& p2);
 Polynomial operator+(const Polynomial& p, int value);
 Polynomial operator+(int value, const Polynomial& p);
 Polynomial operator+(const Polynomial& p, double value);
