@@ -34,7 +34,7 @@ public:
 	Polynomial divide(const Polynomial& divisor) const;
 	Polynomial remainder(const Polynomial& divisor) const;
 	Polynomial derivative() const;
-	Polynomial primitive(double value = 0) const;
+	Polynomial primitive(double value) const;
 	double integral(double lowerBound, double upperBound) const;
 	std::string toString() const;
 	double operator[](int degree) const;
@@ -64,5 +64,7 @@ Polynomial operator*(const Polynomial& p, double value);
 Polynomial operator*(const Polynomial& p1, const Polynomial& p2);
 Polynomial operator/(const Polynomial& p, int value);
 Polynomial operator/(const Polynomial& p, double value);
+Polynomial operator/(const Polynomial& p1, const Polynomial& p2);
+Polynomial operator%(const Polynomial& p1, const Polynomial& p2);
 
 #endif // MY_MATH_H
