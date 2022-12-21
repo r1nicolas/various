@@ -149,6 +149,39 @@ Polynomial Polynomial::divide(double value) const {
 	return Polynomial(resultCoefficients);
 }
 
+Polynomial Polynomial::divide(const Polynomial& divisor) const {
+	Polynomial dividend = *this;
+	if (divisor.getCoefficient(divisor.getDegree()) == 0) {
+		throw std::invalid_argument("Divisor must have a non-zero coefficient for its highest degree term.");
+	}
+	int quotientDegree = dividend.getDegree() - divisor.getDegree();
+	Polynomial quotient(quotientDegree);
+	while (dividend.getDegree() >= divisor.getDegree()) {
+		double coefficient = dividend.getCoefficient(dividend.getDegree()) / divisor.getCoefficient(divisor.getDegree());
+		int degree = dividend.getDegree() - divisor.getDegree();
+		quotient.setCoefficient(degree, coefficient);
+		Polynomial term(degree);
+		term.setCoefficient(degree, coefficient);
+		dividend = dividend.substract(divisor.multiply(term));
+	}
+	return quotient;
+}
+
+Polynomial Polynomial::remainder(const Polynomial& divisor) const {
+	Polynomial dividend = *this;
+	if (divisor.getCoefficient(divisor.getDegree()) == 0) {
+		throw std::invalid_argument("Divisor must have a non-zero coefficient for its highest degree term.");
+	}
+	while (dividend.getDegree() >= divisor.getDegree()) {
+		double coefficient = dividend.getCoefficient(dividend.getDegree()) / divisor.getCoefficient(divisor.getDegree());
+		int degree = dividend.getDegree() - divisor.getDegree();
+		Polynomial term(degree);
+		term.setCoefficient(degree, coefficient);
+		dividend = dividend.substract(divisor.multiply(term));
+	}
+	return dividend;
+}
+
 Polynomial Polynomial::derivative() const {
 	int resultDegree = coefficients.size();
 	std::vector<double> resultCoefficients(resultDegree - 1);
@@ -293,4 +326,12 @@ Polynomial operator/(const Polynomial& p, int value) {
 
 Polynomial operator/(const Polynomial& p, double value) {
 	return p.divide(value);
+}
+
+Polynomial operator/(const Polynomial& p1, const Polynomial& p2) {
+	return p1.divide(p2);
+}
+
+Polynomial operator%(const Polynomial& p1, const Polynomial& p2) {
+	return p1.remainder(p2);
 }
