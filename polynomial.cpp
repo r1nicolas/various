@@ -93,7 +93,7 @@ Polynomial Polynomial::substract(double value) const {
 	return result;
 }
 
-Polynomial Polynomial::subtract(const Polynomial& other) const {
+Polynomial Polynomial::substract(const Polynomial& other) const {
 	int resultDegree = std::max(this->getDegree(), other.getDegree());
 	std::vector<double> resultCoefficients(resultDegree + 1, 0.0);
 	for (int i = 0; i <= resultDegree; i++) {
@@ -164,7 +164,7 @@ Polynomial Polynomial::primitive(double value = 0) const {
 	for (int i = 0; i < resultDegree; ++i) {
 		resultCoefficients[i + 1] = coefficients[i] / (i + 1);
 	}
-	prim_coeffs[0] = value;
+	resultCoefficients[0] = value;
 	return Polynomial(resultCoefficients);
 }
 
@@ -264,7 +264,7 @@ Polynomial operator-(double value, const Polynomial& p) {
 }
 
 Polynomial operator-(const Polynomial& p1, const Polynomial& p2) {
-	return p1.subtract(p2);
+	return p1.substract(p2);
 }
 
 Polynomial operator*(int value, const Polynomial& p) {
