@@ -25,12 +25,14 @@ public:
 	Polynomial add(const Polynomial& other) const;
 	Polynomial substract(int value) const;
 	Polynomial substract(double value) const;
-	Polynomial subtract(const Polynomial& other) const;
+	Polynomial substract(const Polynomial& other) const;
 	Polynomial multiply(int value) const;
 	Polynomial multiply(double value) const;
 	Polynomial multiply(const Polynomial& other) const;
 	Polynomial divide(int value) const;
 	Polynomial divide(double value) const;
+	Polynomial divide(const Polynomial& divisor) const;
+	Polynomial remainder(const Polynomial& divisor) const;
 	Polynomial derivative() const;
 	Polynomial primitive(double value = 0) const;
 	double integral(double lowerBound, double upperBound) const;
