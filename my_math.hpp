@@ -36,6 +36,10 @@ public:
 	Polynomial derivative() const;
 	Polynomial primitive(double value) const;
 	double integral(double lowerBound, double upperBound) const;
+	double limitAsXApproachesPossitiveInfinity() const;
+	double limitAsXApproachesNegativeInfinity() const;
+	bool isOdd() const;
+	bool isOdd() const;
 	std::string toString() const;
 	double operator[](int degree) const;
 private:
