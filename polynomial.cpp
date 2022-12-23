@@ -206,6 +206,57 @@ double Polynomial::integral(double lowerBound, double upperBound) const {
 	return primitive.evaluate(upperBound) - primitive.evaluate(lowerBound);
 }
 
+double Polynomial::limitAsXApproachesPossitiveInfinity() const {
+	int degree = this->getDegree();
+	while (degree >= 0 && this->getCoefficient(degree) == 0) {
+		degree--;
+	}
+	if (degree < 0) {
+		return 0;
+	} else if (degree == 0) {
+		return this->getCoefficient(degree);
+	} else if (this->getCoefficient(degree) > 0) {
+		return std::numeric_limits<double>::infinity();
+	}
+	return -std::numeric_limits<double>::infinity();
+}
+
+double Polynomial::limitAsXApproachesNegativeInfinity() const {
+	int degree = this->getDegree();
+	while (degree >= 0 && this->getCoefficient(degree) == 0) {
+		degree--;
+	}
+	if (degree < 0) {
+		return 0;
+	} else if (degree == 0) {
+		return this->getCoefficient(degree);
+	} else if (degree % 2 = 0) {
+		if (this->getCoefficient(degree) > 0) {
+			return std::numeric_limits<double>::infinity();
+		}
+		return -std::numeric_limits<double>::infinity();
+	} else if (this->getCoefficient(degree) > 0) {
+		return -std::numeric_limits<double>::infinity();
+	}
+	return std::numeric_limits<double>::infinity();
+}
+
+bool Polynomial::isOdd() const {
+	for (int i = 0;i <= this->getDegree();i += 2) {
+		if (this->getCoefficient(i))
+			return false;
+	}
+	return true;
+}
+
+bool Polynomial::isOdd() const {
+	for (int i = 1;i <= this->getDegree();i += 2) {
+		if (this->getCoefficient(i))
+			return false;
+	}
+	return true;
+}
+
 std::string Polynomial::toString() const {
 	int degree = this->getDegree();
 	std::ostringstream oss;
