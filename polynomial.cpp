@@ -191,6 +191,14 @@ Polynomial Polynomial::derivative() const {
 	return Polynomial(resultCoefficients);
 }
 
+Polynomial Polynomial::tangent(double value) const {
+	Polynomial derivative = this->derivative();
+	double slope = derivative.evaluate(value);
+	double y = this->evaluate(value);
+	Polynomial tangent({-slope * value + y, slope});
+	return tangent;
+}
+
 Polynomial Polynomial::primitive(double value = 0) const {
 	int resultDegree = coefficients.size();
 	std::vector<double> resultCoefficients(resultDegree + 1);
