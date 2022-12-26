@@ -34,7 +34,8 @@ public:
 	Polynomial divide(const Polynomial& divisor) const;
 	Polynomial remainder(const Polynomial& divisor) const;
 	Polynomial derivative() const;
-	Polynomial primitive(double value) const;
+	Polynomial tangent(double value) const;
+	Polynomial primitive(double value = 0) const;
 	double integral(double lowerBound, double upperBound) const;
 	double limitAsXApproachesPossitiveInfinity() const;
 	double limitAsXApproachesNegativeInfinity() const;
